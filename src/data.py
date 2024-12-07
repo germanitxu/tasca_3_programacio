@@ -30,6 +30,7 @@ class PenguinsData:
         1: "Adelie",
         2: "Gentoo"
     }
+
     def __init__(self, empty=False):
         if not empty:
             self._set_train_test_data()
@@ -46,6 +47,9 @@ class PenguinsData:
         df = df[df.sex.isin(["MALE", "FEMALE"])]
         return df
 
+    def _save_data(self, data):
+        data.to_csv("src/datasets/penguins_test.csv")
+
     def _set_train_test_data(self):
         # Retrieve the data
         df = self._get_data()
@@ -59,6 +63,9 @@ class PenguinsData:
 
         # df_train, df_test = train_test_split(df, test_size=0.2, random_state=1)
         x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1, stratify=y)
+        y_test_names = [self.SPECIES_DICT_REV[val] for val in y_test]
+        x_test["species"] = y_test_names
+        self._save_data(x_test)
         self.Y_TRAIN = y_train
 
         # One-hot prediction for training data

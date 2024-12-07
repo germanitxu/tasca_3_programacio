@@ -13,7 +13,7 @@ base_data = {
 endpoints = ["predict_lr", "predict_svm", "predict_dt", "predict_knn"]
 base_url = "http://127.0.0.1:8000/"
 
-df = pd.read_csv("../tests/datasets/penguins_eval.csv")
+df = pd.read_csv("../src/datasets/penguins_test.csv")
 for index, penguin in df.iterrows():
     print(">>>")
     print(penguin)

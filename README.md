@@ -36,5 +36,5 @@ A la carpeta `test` n'hi ha dos scripts per testear el models y la aplicació de
 
 ### Proves del client
 
-Dins la carpeta `webapp`, el fitxer `client.py` usa els datasets de tests per fer cridades cadascuns dels endpoints del server de flask.
+Dins la carpeta `webapp`, el fitxer `client.py` usa els datasets de tests ([penguins_test.csv]([https://github.com/germanitxu/tasca_3_programacio/blob/master/src/datasets/penguins_test.csv])) per fer cridades cadascuns dels endpoints del server de flask.
 
