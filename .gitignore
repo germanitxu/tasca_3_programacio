@@ -1,0 +1,8 @@
+# Virtual environment
+.venv
+
+# Pycharm things
+.idea
+__pycache__
+# Models guardats
+src/saves/*
