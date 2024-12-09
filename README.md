@@ -6,7 +6,11 @@ python>=3.12
 poetry>=1.8.4
 
 ## Instalació
-
+Clona el repositori
+```shell
+git clone git@github.com:germanitxu/tasca_3_programacio.git
+cd tasca_3_programacio
+```
 Usa poetry per instalar les llibreries
 
 ```shell
@@ -18,7 +22,7 @@ poetry install
 Pren l'aplicació llançant amb python el script `main.py`
 
 ```shell
-python main.py
+poetry run python main.py
 ```
 
 o

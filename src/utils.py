@@ -1,4 +1,5 @@
 import pickle
+from pathlib import Path
 
 from sklearn.feature_extraction import DictVectorizer
 
@@ -11,6 +12,7 @@ def save_model(model, name, dv):
     :param dv: DictVectorizer
     :return:
     """
+    Path("src/saves").mkdir(parents=True, exist_ok=True)
     with open(f"src/saves/{name}.pck", 'wb') as f:
         pickle.dump((dv, model), f)
 

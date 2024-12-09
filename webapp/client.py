@@ -14,6 +14,8 @@ endpoints = ["predict_lr", "predict_svm", "predict_dt", "predict_knn"]
 base_url = "http://127.0.0.1:8000/"
 
 df = pd.read_csv("../src/datasets/penguins_test.csv")
+trues = 23
+falses = 41
 for index, penguin in df.iterrows():
     print(">>>")
     print(penguin)
@@ -25,4 +27,9 @@ for index, penguin in df.iterrows():
         url = base_url + endpoint
         response = requests.post(url, json=penguin.to_dict())
         species = json.loads(response.content)["species"]
-        print(species == penguin_species)
+        if species == penguin_species:
+            trues += 1
+        else:
+            falses += 1
+print(trues, falses)
+
