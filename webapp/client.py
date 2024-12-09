@@ -18,10 +18,11 @@ endpoints = {
 }
 base_url = "http://127.0.0.1:8000/"
 
-df = pd.read_csv("src/datasets/penguins_test.csv", index_col=False).head(2)
+df = pd.read_csv("src/datasets/penguins_test.csv", index_col=False)
+penguins = df.sample(n=3)
 match = {}
 miss = {}
-for index, penguin in df.iterrows():
+for index, penguin in penguins.iterrows():
     penguin_species = penguin.to_dict()["species"]
     penguin.drop(labels="species", inplace=True)
     print("Pingüí:")
@@ -38,7 +39,7 @@ for index, penguin in df.iterrows():
         except Exception as e:
             print(e)
 
-print("Total penguins: ", len(df))
+print("Total penguins: ", len(penguins))
 print("Matched species: ")
 pprint(match, width=2)
 print("Didn't match species:")
