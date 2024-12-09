@@ -7,8 +7,8 @@ app = Flask('Penguins')
 
 
 def predict_from_request(model_name, request_json):
-    dv, model = get_model(name=model_name)
-    species, prediction = predict(request_json, model, dv)
+    dv, sc, model = get_model(name=model_name)
+    species, prediction = predict(request_json, model, dv, sc)
     species_name = get_species_from_prediction(species)
     result = {
         'species': species_name,

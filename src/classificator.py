@@ -1,5 +1,3 @@
-from tkinter.tix import Select
-
 import pandas as pd
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
@@ -7,7 +5,7 @@ from sklearn.feature_extraction import DictVectorizer
 from sklearn.preprocessing import StandardScaler
 
 
-class PenguinsData:
+class PenguinClassificator:
     """
     SC: StandardScaler used
     x_train: Training data standardized
@@ -16,6 +14,7 @@ class PenguinsData:
     SC: StandardScaler | None = None
     DV: DictVectorizer | None = None
     X_TRAIN = None
+    X_TRAIN_VECTOR = None
     Y_TRAIN = None
     CATEGORICAL = ['sex', 'island']
     NUMERICAL = ['culmen_length_mm', 'culmen_depth_mm', 'flipper_length_mm',
@@ -41,13 +40,13 @@ class PenguinsData:
         Returns a dataframe empty of nulls
         :return: DataFrame
         """
-
         df = pd.read_csv("src/datasets/penguins.csv").dropna()
         # Penguins in this list have more than 2 genders, which is totally respectable, but it was breaking my DictVectorizer  # noqa
         df = df[df.sex.isin(["MALE", "FEMALE"])]
         return df
 
-    def _save_data(self, data):
+    @staticmethod
+    def _save_data(data):
         data.to_csv("src/datasets/penguins_test.csv")
 
     def _set_train_test_data(self):
@@ -74,9 +73,11 @@ class PenguinsData:
         dv_train.fit(train_dict)
         x_train_vector = dv_train.transform(train_dict)
         self.DV = dv_train
+        self.X_TRAIN_VECTOR = x_train_vector
 
         # Standardization
         sc = StandardScaler()
         sc.fit(x_train_vector)
         self.SC = sc
         self.X_TRAIN = sc.transform(x_train_vector)
+        # We are also asked to do the standardization of the test data, althought we don't use it here

@@ -1,6 +1,7 @@
 import pandas as pd
 import requests
 import json
+import os
 
 base_data = {
     "island": 0,
@@ -13,23 +14,26 @@ base_data = {
 endpoints = ["predict_lr", "predict_svm", "predict_dt", "predict_knn"]
 base_url = "http://127.0.0.1:8000/"
 
-df = pd.read_csv("../src/datasets/penguins_test.csv")
-trues = 23
-falses = 41
+df = pd.read_csv("src/datasets/penguins_test.csv")
+match = {}
+miss = {}
+
 for index, penguin in df.iterrows():
-    print(">>>")
-    print(penguin)
-    print(">>>")
     penguin_species = penguin.to_dict()["species"]
     penguin.drop(labels="species", inplace=True)
     for endpoint in endpoints:
-        print(f"Using {endpoint}")
-        url = base_url + endpoint
-        response = requests.post(url, json=penguin.to_dict())
-        species = json.loads(response.content)["species"]
-        if species == penguin_species:
-            trues += 1
-        else:
-            falses += 1
-print(trues, falses)
+        try:
+            url = base_url + endpoint
+            response = requests.post(url, json=penguin.to_dict())
+            species = json.loads(response.content)["species"]
+            if species == penguin_species:
+                match[endpoint] = match.get(endpoint, 0) + 1
+            else:
+                miss[endpoint] = miss.get(endpoint, 0) + 1
+        except Exception as e:
+            print(e)
+
+print("Total penguins: ", len(df))
+print(f"Matched species: {match}")
+print(f"Didn't match species: {miss}")
 
