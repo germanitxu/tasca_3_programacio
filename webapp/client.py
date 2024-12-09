@@ -32,6 +32,7 @@ for index, penguin in penguins.iterrows():
             url = base_url + endpoint
             response = requests.post(url, json=penguin.to_dict())
             species = json.loads(response.content)["species"]
+            print(model_name, f": espècie-> {species}")
             if species == penguin_species:
                 match[model_name] = match.get(model_name, 0) + 1
             else:
