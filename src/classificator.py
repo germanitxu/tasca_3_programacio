@@ -47,7 +47,7 @@ class PenguinClassificator:
 
     @staticmethod
     def _save_data(data):
-        data.to_csv("src/datasets/penguins_test.csv")
+        data.to_csv("src/datasets/penguins_test.csv", index=False)
 
     def _set_train_test_data(self):
         # Retrieve the data
