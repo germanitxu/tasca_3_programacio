@@ -39,7 +39,7 @@ A la carpeta `test` n'hi ha dos scripts per testear el models y la aplicació de
 
 Dins la carpeta `webapp`, el fitxer `client.py` usa els datasets de tests [penguins_test.csv]([https://github.com/germanitxu/tasca_3_programacio/blob/master/src/datasets/penguins_test.csv]) per fer cridades cadascuns dels endpoints del server de flask.
 ```shell
-poetry run python client.py
+poetry run python webapp/client.py
 ```
 Per fer cridades usant curl o un client de petitions, pots usar aquest eixample:
 
