@@ -10,13 +10,13 @@ base_data = {
     "body_mass_g": 0,
     "sex": "FEMALE",
 }
-endpoints = {
+endpoints = {  # model name: url on the web servive
     "Logistic Regression": "predict_lr",
     "Support Vector Machine": "predict_svm",
     "Decision Tree": "predict_dt",
     "k-Nearest Neighbours": "predict_knn"
 }
-base_url = "http://127.0.0.1:8000/"
+base_url = "http://127.0.0.1:8000/"  # Web service URL
 
 df = pd.read_csv("src/datasets/penguins_test.csv", index_col=False)
 penguins = df.sample(n=3)

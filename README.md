@@ -2,8 +2,8 @@
 
 ## Requeriments
 
-python>=3.12
-poetry>=1.8.4
+- python>=3.12
+- [Poetry](https://python-poetry.org/)
 
 ## Instal·lació
 Clona el repositori
