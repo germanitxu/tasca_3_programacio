@@ -32,6 +32,9 @@ A `main.py` s'entrenen els models, es guardan als fitxers y levanta el servidor 
 
 Sense desconectar aques fil, pots probar els tests y el client, explicats a continuació.
 
+A la rama [prediction_form](https://github.com/germanitxu/tasca_3_programacio/tree/prediction_form) hi ha una aplicació web que permet fer prediccions amb els quatre models entrenats. Una vegada llençada l'aplicació, pots accedir a [localhost o 127.0.0.1](http://localhost:8000/) y probar el formulari.
+```shell
+
 ### Tests
 A la carpeta `test` n'hi ha dos scripts per testear el models y la aplicació de flask, usant una troç de dades dels pinguins guardada a `tests/datasets`.
 
