@@ -15,7 +15,7 @@ def save_model(model, name, dv, sc):
     :return:
     """
     Path("src/saves").mkdir(parents=True, exist_ok=True)
-    with open(f"src/saves/{name}.pck", 'wb') as f:
+    with open(f"src/saves/{name}.pck", "wb") as f:
         pickle.dump((dv, sc, model), f)
 
 
@@ -25,12 +25,14 @@ def get_model(name):
     :param name: Name of the model file to load
     :return: Tuple(DictVectorizer, model)
     """
-    with open(f"src/saves/{name}.pck", 'rb') as f:
+    with open(f"src/saves/{name}.pck", "rb") as f:
         dv, sc, model = pickle.load(f)
     return dv, sc, model
 
 
-def predict(specimen: dict, model, dv: DictVectorizer, sc: StandardScaler, percent=0.5) -> (list[bool], list[float]):
+def predict(
+    specimen: dict, model, dv: DictVectorizer, sc: StandardScaler, percent=0.5
+) -> (list[bool], list[float]):
     """
     Predict the result of specimen
     :param specimen: The specimen we are trying to get y_pred
@@ -54,4 +56,5 @@ def get_species_from_prediction(prediction) -> str:
     :return: Name of the species
     """
     from src.classificator import PenguinClassificator
+
     return PenguinClassificator.SPECIES_DICT_REV[list(prediction).index(True)]
