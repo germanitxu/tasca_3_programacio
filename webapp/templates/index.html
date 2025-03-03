@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
+
+{% block title %}
+Classificador de Pingüins
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+            <h1 class="pt-5 pb-2 text-center">Tria les mides y endevinaré l'especie del pingüí! </h1>
+            <figure class="mb-5 mt-5">
+                <img src="{{ url_for('static', filename='images/penguins.png') }}" alt="Our protagonists for this show"
+                     class="img-fluid">
+                <figcaption class="text-center">
+                    <cite title="Source Title">Artwork by <a
+                            href="https://twitter.com/allison_horst">Allison Horst</a>
+                    </cite>
+                </figcaption>
+            </figure>
+            <div class="mt-3 d-flex  justify-content-center">
+                <a href="/form" class="btn btn-primary btn-lg" role="button" aria-pressed="true">
+                    Fes el test!
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

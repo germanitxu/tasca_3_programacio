@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% from 'bootstrap4/form.html' import render_field %}
+
+{% block title %}
+Classificador de Pingüins
+{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/form.css') }}">
+{% endblock %}
+{% block content %}
+
+<div class="form-header text-center my-5">
+    <h1>Mesures del pingüí</h1>
+</div>
+{% if species and penguin %}
+<div id="Resultat" class="pt-5 d-flex flex-column">
+    <h2 class="color-{{ species }} text-center mb-3">{{ species }}</h2>
+    <div class="penguin color-{{ species }} align-self-center">
+        {{ svg }}
+    </div>
+
+    <div class="d-flex flex-column align-items-center">
+        {% if penguin.sex == MALE %}
+        <h4><i class="bi bi-gender-male" style="color: #0071a1"></i></h4>
+        {% else %}
+        <h4><i class="bi bi-gender-female" style="color: #d4639b"></i></h4>
+        {% endif %}
+        <p>Longitud del bec: <b>{{ penguin.culmen_length_mm }} mm</b></p>
+        <p>Profunditat del bec: <b>{{ penguin.culmen_length_mm }} mm</b></p>
+        <p>Longitud de la aleta: <b>{{ penguin.flipper_length_mm }} mm</b></p>
+        <p>Longitud del cos: <b>{{ penguin.body_mass_g }} g</b></p>
+        <a href="/form"><i class="bi bi-arrow-left me-2"></i> Tornar a fer el formulari.</a>
+    </div>
+
+</div>
+{% else %}
+
+<form class="form-container" action="{{ url_for('form') }}" method="POST">
+    {{ form.csrf_token() }}
+    <div class="penguin">
+        {{ svg }}
+
+        <div class="measurement-field culmen-length">
+            {{ render_field(form.culmen_length_mm) }}
+        </div>
+
+        <div class="measurement-field culmen-depth">
+            {{ render_field(form.culmen_depth_mm) }}
+        </div>
+
+        <div class="measurement-field flipper-length">
+            {{ render_field(form.flipper_length_mm) }}
+        </div>
+
+        <div class="measurement-field body-mass">
+            {{ render_field(form.body_mass_g) }}
+        </div>
+    </div>
+
+
+    <div class="select-fields">
+        <div class="select">
+            <p>Illa<i class="bi bi-globe-asia-australia"></i></p>
+            <select class="form-select form-select-lg" name="island" required>
+                {% for option in form.island %}
+                {{ option }}
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="select">
+            <p>Sexe<i class="bi bi-gender-female"></i>/<i class="bi bi-gender-male"></i></p>
+            <select class="form-select form-select-lg" name="sex" required>
+                {% for option in form.sex %}
+                {{ option }}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="select">
+            <p>Model<i class="bi bi-gear-wide-connected"></i></p>
+            <select class="form-select form-select-lg" name="model" required>
+                {% for option in form.model %}
+                {{ option }}
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">
+            Enviar
+        </button>
+        <a href="/" class="btn btn-danger">
+            Cancel·lar
+        </a>
+    </div>
+
+</form>
+{% endif %}
+{% endblock %}

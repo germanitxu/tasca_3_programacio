@@ -1,0 +1,169 @@
+.form-container {
+    position: relative;
+    width: 1200px;
+    margin: 20px auto;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container button {
+}
+
+.penguin-image {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+    height: 400px;
+}
+
+.measurement-field {
+    position: absolute;
+    width: 200px;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.measurement-field::before {
+    content: '';
+    position: absolute;
+    border-top: 2px solid #666;
+    width: 50px;
+}
+
+/* Culmen length position - horizontal measurement */
+.culmen-length {
+    top: -30px;
+    right: 40px;
+}
+
+.culmen-length::before {
+    right: 100%;
+    top: 60%;
+    width: 70px;
+    transform: rotate(-35deg);
+}
+
+/* Culmen depth position - vertical measurement */
+.culmen-depth {
+    top: 80px;
+    right: 40px;
+}
+
+.culmen-depth::before {
+    right: 100%;
+    top: 13%;
+    width: 70px;
+    transform: rotate(35deg);
+}
+
+/* Flipper length position - aimed at left flipper */
+.flipper-length {
+    top: 200px;
+    left: 10px;
+}
+
+.flipper-length::before {
+    left: 100%;
+    top: 50%;
+    width: 60px;
+}
+
+/* Body mass position - aimed at feet */
+.body-mass {
+    top: 400px;
+    left: calc(50% + 20px);
+    transform: translateX(-50%);
+}
+
+.body-mass::before {
+    display: none;
+}
+
+/* Select fields at the bottom */
+.select-fields {
+    margin-top: 60px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.select-fields select {
+    margin: 0 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.select {
+    width: 45%;
+    margin: 0 20px;
+    margin-bottom: 10px;
+}
+
+.select:last-child {
+    width: 100%;
+}
+
+.select p {
+    margin: 0;
+    text-align: start;
+    margin-left: 20px;
+}
+
+.select p i {
+    color: var(--bs-blue);
+    margin-left: 5px;
+}
+
+.select-fields select:hover {
+    /* border-color: var(--bs-blue); */
+    color: var(--bs-blue);
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.penguin svg {
+    height: 400px;
+}
+
+.penguin {
+    margin-bottom: 50px;
+    width: 800px;
+    position: relative;
+    align-self: center;
+}
+.form-actions {
+    align-self: center;
+    margin-top: 30px;
+}
+
+.form-actions * {
+    min-width: 100px;
+}
+/* Resultats */
+.penguin.color-Gentoo svg path:last-child {
+    fill: #2A733B;
+}
+
+.penguin.color-Chinstrap svg path:last-child {
+    fill: #c445d3de;
+}
+
+.penguin.color-Adelie svg path:last-child {
+    fill: #f87400;
+}

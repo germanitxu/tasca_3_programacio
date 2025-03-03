@@ -1,3 +1,5 @@
+from unittest.mock import inplace
+
 import pandas as pd
 from pandas import DataFrame
 from sklearn.model_selection import train_test_split
@@ -11,24 +13,21 @@ class PenguinClassificator:
     x_train: Training data standardized
     Y_TRAIN: Train Species
     """
+
     SC: StandardScaler | None = None
     DV: DictVectorizer | None = None
     X_TRAIN = None
     X_TRAIN_VECTOR = None
     Y_TRAIN = None
-    CATEGORICAL = ['sex', 'island']
-    NUMERICAL = ['culmen_length_mm', 'culmen_depth_mm', 'flipper_length_mm',
-                 'body_mass_g']
-    SPECIES_DICT = {
-        "Chinstrap": 0,
-        "Adelie": 1,
-        "Gentoo": 2
-    }
-    SPECIES_DICT_REV = {
-        0: "Chinstrap",
-        1: "Adelie",
-        2: "Gentoo"
-    }
+    CATEGORICAL = ["sex", "island"]
+    NUMERICAL = [
+        "culmen_length_mm",
+        "culmen_depth_mm",
+        "flipper_length_mm",
+        "body_mass_g",
+    ]
+    SPECIES_DICT = {"Chinstrap": 0, "Adelie": 1, "Gentoo": 2}
+    SPECIES_DICT_REV = {0: "Chinstrap", 1: "Adelie", 2: "Gentoo"}
 
     def __init__(self, empty=False):
         if not empty:
@@ -54,21 +53,26 @@ class PenguinClassificator:
         df = self._get_data()
 
         # Swap species for numerical value
-        df.species = df.species.replace(self.SPECIES_DICT)
+        # df.species = df.species.replace(self.SPECIES_DICT)   # https://github.com/pandas-dev/pandas/issues/57734
+        df.species = df.species.map(self.SPECIES_DICT)
         y = df.species.values
-        x = df.loc[:, df.columns != 'species']
+        x = df.loc[:, df.columns != "species"]
 
         # Split test and train data
 
         # df_train, df_test = train_test_split(df, test_size=0.2, random_state=1)
-        x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=1, stratify=y)
+        x_train, x_test, y_train, y_test = train_test_split(
+            x, y, test_size=0.2, random_state=1, stratify=y
+        )
         y_test_names = [self.SPECIES_DICT_REV[val] for val in y_test]
         x_test["species"] = y_test_names
         self._save_data(x_test)
         self.Y_TRAIN = y_train
 
         # One-hot prediction for training data
-        train_dict = x_train[self.CATEGORICAL + self.NUMERICAL].to_dict(orient='records')
+        train_dict = x_train[self.CATEGORICAL + self.NUMERICAL].to_dict(
+            orient="records"
+        )
         dv_train = DictVectorizer(sparse=False)
         dv_train.fit(train_dict)
         x_train_vector = dv_train.transform(train_dict)

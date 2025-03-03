@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 import json
 from pprint import pprint
+
 base_data = {
     "island": 0,
     "culmen_length_mm": 0,
@@ -14,7 +15,7 @@ endpoints = {  # model name: url on the web servive
     "Logistic Regression": "predict_lr",
     "Support Vector Machine": "predict_svm",
     "Decision Tree": "predict_dt",
-    "k-Nearest Neighbours": "predict_knn"
+    "k-Nearest Neighbours": "predict_knn",
 }
 base_url = "http://127.0.0.1:8000/"  # Web service URL
 
